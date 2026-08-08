@@ -124,3 +124,24 @@ This document details the frontend directory layout, routing strategy, component
   - Desktop / Large Desktop: `h-11 lg:h-12 w-auto` (~44-48px visual height) providing a highly professional and visible brand anchor.
   - Mobile & Drawer: `h-9 w-auto` (~36px visual height) maintaining compact 56px (`h-14`) mobile bar proportions.
 - **Backend API Integration Status**: Navigation menu and category dropdown endpoints are currently frontend abstractions ready for future `navigation.service.js` integration.
+
+---
+
+## 🎠 Storefront Homepage Hero Carousel Redesign & Layout Correction (Phase 2 UI-2 & UI-2.1)
+- **Grid Layout Proportions**:
+  - **Single Horizontal Composition**: Sits within a standard `max-w-7xl mx-auto` container. The layout preserves the same fundamental horizontal composition across all desktop, tablet, and mobile breakpoints (`flex flex-row`).
+  - **Proportional Width Alignment**: The Main Hero Carousel occupies `74%–77%` width, and the stacked promotional column occupies `23%–26%` width across all screen widths.
+  - **Proportional Height Scaling**: Heights align perfectly at all breakpoints without layout shifts or stacking distortion:
+    - **Large Desktop (`xl:`)**: `h-[500px]` for both Left Main Carousel and Right Banners.
+    - **Desktop (`lg:`)**: `h-[450px]` for both Left Main Carousel and Right Banners.
+    - **Tablet (`md:`)**: `h-[320px]` for both Left Main Carousel and Right Banners.
+    - **Mobile (`sm:`)**: `h-[220px]` for both Left Main Carousel and Right Banners.
+    - **Ultra-compact Mobile**: `h-[160px]` for both Left Main Carousel and Right Banners.
+  - **Compact Gaps & Borders**: Features responsive, compact spacing (`gap-2 sm:gap-3 md:gap-4`) and optimized border-radius styling matching the container sizing.
+- **Interactive Carousel Engine (`HeroSlider.jsx`)**:
+  - **Autoplay Control**: Auto-slides every `5` seconds, automatically checking `document.hidden` and pausing if the browser tab is hidden or if the user hovers over the slider container.
+  - **Navigation & Pagination**: Combined discrete, screen-reader friendly dash dots for slide indicator selection on the bottom-left, and sleek glassmorphic directional arrows (`lucide-react` Chevron icons) on the bottom-right.
+  - **Accessibility & Motion**: Detects browser motion preferences (`prefers-reduced-motion`) and gracefully strips out opacity transitions and background Ken Burns zoom animations if reduced motion is requested. Includes standard keyboard hook listeners (`ArrowLeft` / `ArrowRight`) and native touch gestures for smooth swipe scrolling.
+  - **Image Rendering**: Leverages native Next.js `<Image>` optimizations with high-resolution Unsplash assets, explicit container dimensions to eliminate layout shifts, and mandatory `referrerPolicy="no-referrer"` properties.
+- **Backend CMS Slicing**: Slide and banner data objects are designed with decoupled frontend presentation contracts (`tag`, `title`, `subtitle`, `image`, `ctaText`, `ctaLink`, `badge`, `href`), making them fully prepared for seamless integration with future REST APIs or CMS endpoints.
+
