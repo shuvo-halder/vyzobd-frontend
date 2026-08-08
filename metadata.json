@@ -1,0 +1,8 @@
+{
+  "name": "Vyzobd E-Commerce",
+  "description": "E-commerce web application imported from vyzobd_demo_frontend",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
