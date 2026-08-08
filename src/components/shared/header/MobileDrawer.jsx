@@ -44,7 +44,7 @@ export default function MobileDrawer({ isOpen, onClose, user, logout, isAdmin })
   if (!isOpen) return null;
 
   return (
-    <div className="md:hidden fixed inset-0 z-50 overflow-hidden">
+    <div className="lg:hidden fixed inset-0 z-50 overflow-hidden">
       {/* Backdrop */}
       <div
         className="fixed inset-0 bg-black/50 backdrop-blur-xs transition-opacity duration-300"

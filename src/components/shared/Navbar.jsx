@@ -73,9 +73,9 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-40 w-full bg-secondary shadow-sm border-b border-primary/10">
       {/* ========================================================= */}
-      {/* DESKTOP HEADER (Visible md and above)                     */}
+      {/* DESKTOP HEADER (Visible lg and above)                     */}
       {/* ========================================================= */}
-      <div className="hidden md:block">
+      <div className="hidden lg:block">
         {/* Top Header Row: Logo | Search | Actions */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2.5">
           <div className="flex items-center justify-between gap-6">
@@ -260,9 +260,9 @@ export default function Navbar() {
       </div>
 
       {/* ========================================================= */}
-      {/* MOBILE HEADER BAR (Visible below md)                      */}
+      {/* MOBILE HEADER BAR (Visible below lg)                      */}
       {/* ========================================================= */}
-      <div className="md:hidden flex items-center justify-between h-14 px-4 bg-secondary">
+      <div className="lg:hidden flex items-center justify-between h-14 px-4 bg-secondary">
         {/* Hamburger Menu Toggle */}
         <button
           onClick={handleOpenDrawer}

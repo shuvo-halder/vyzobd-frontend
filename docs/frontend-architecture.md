@@ -118,6 +118,7 @@ This document details the frontend directory layout, routing strategy, component
   - **Bottom Row**: Horizontal navigation links with hoverable category dropdown preview, and customer hotline contact info (`h-11`).
 - **Mobile Header & Drawer (`src/components/shared/header/MobileDrawer.jsx`)**:
   - Compact mobile top bar (`h-14`) with working hamburger toggle button (`handleOpenDrawer`), centered logo (`h-9 w-auto`), and cart badge.
+  - Active below `lg` (1024px) viewport width, enabling full accessibility of the hamburger toggle on both tablet (768px - 1023px) and mobile devices.
   - Slide-over off-canvas drawer with backdrop, Escape key listener, body scroll lock, search input, vertical category accordion, and account action footer.
 - **Responsive Logo Strategy**:
   - **SVG Viewport Optimization**: Optimized `/public/logos/logo.svg`'s `viewBox` from `0 0 64 64` (with ~50% vertical empty whitespace) to a tight `1 11 62 31` (2:1 widescreen aspect ratio), removing vertical padding so that the actual visible logo artwork fills the rendered container.
