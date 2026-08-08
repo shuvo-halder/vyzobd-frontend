@@ -32,26 +32,22 @@ The target Customer Portal will provide a unified account hub (`/account`) struc
 
 ## 🚀 Execution Phases
 
-### Phase 1: Analysis & Documentation (COMPLETED)
-- [x] Audit codebase, existing services, and routes.
+### Phase 1: Foundation & Customer Panel Layout (COMPLETED)
+- [x] Audit codebase, existing services, API clients, and routes.
 - [x] Create comprehensive documentation system under `/docs`.
 - [x] Establish development protocols and change safety rules.
+- [x] Create `/src/app/account/` layout and route architecture.
+- [x] Implement `CustomerSidebar.jsx` with customer-centric navigation links.
+- [x] Create `AccountLayout` (`/account/layout.jsx`) with strict `isAuthenticated` guard.
+- [x] Assemble Customer Dashboard overview (`/account`) bound to real `orderService.getMyOrders()` data.
+- [x] Integrate `/account/profile` (Profile & Security) and `/account/orders` (Order History).
+- [x] Create UI shells for `/account/addresses`, `/account/wishlist`, and `/account/settings`.
+- [x] Update Navbar user dropdown and mobile navigation to direct customers to `/account`.
 
-### Phase 2: Customer Layout & Sidebar Construction (NEXT PHASE)
-- [ ] Create `/src/app/(shop)/account/` directory structure.
-- [ ] Implement `CustomerSidebar.jsx` with customer navigation links.
-- [ ] Create `AccountLayout` with `isAuthenticated` guard.
-
-### Phase 3: Order History & Profile Migration
-- [ ] Migrate `getMyOrders` integration into `/account/orders`.
-- [ ] Migrate profile and password forms into `/account/profile`.
-- [ ] Assemble Customer Dashboard overview (`/account`).
-
-### Phase 4: Pending Feature Integration (Upon API Availability)
+### Phase 2: Pending Feature Integration (Upon API Availability)
 - [ ] Integrate Single Order Detail view (`/account/orders/[id]`).
 - [ ] Integrate Address Book APIs (`/account/addresses`).
 - [ ] Integrate Wishlist APIs (`/account/wishlist`).
 
-### Phase 5: Cleanup & Deprecation
-- [ ] Deprecate legacy `/admin` storefront pages once `/account` is verified.
-- [ ] Update Navbar profile links to point directly to `/account`.
+### Phase 3: Cleanup & Deprecation
+- [ ] Deprecate legacy `/admin` storefront pages once external admin app handles store admin.

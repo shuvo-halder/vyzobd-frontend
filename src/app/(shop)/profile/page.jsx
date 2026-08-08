@@ -1,39 +1,18 @@
 "use client";
 
-import { useEffect, useState } from "react";
-
-import toast from "react-hot-toast";
-import ProfileForm from "@/components/shared/ProfileForm";
-import { userService } from "@/services/user.service";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 export default function ProfilePage() {
-  const [profile, setProfile] = useState(null);
-
-  const [loading, setLoading] = useState(true);
-
-  const fetchProfile = async () => {
-    try {
-      const { data } = await userService.getProfile();
-
-      setProfile(data.user);
-    } catch (error) {
-      toast.error(error.response?.data?.message || "Failed to load profile");
-    } finally {
-      setLoading(false);
-    }
-  };
+  const router = useRouter();
 
   useEffect(() => {
-    fetchProfile();
-  }, []);
-
-  if (loading) return <h2>Loading...</h2>;
+    router.replace("/account/profile");
+  }, [router]);
 
   return (
-    <div className="max-w-3xl mx-auto p-10">
-      <h1 className="text-3xl font-bold mb-8">My Profile</h1>
-
-      <ProfileForm profile={profile} setProfile={setProfile} />
+    <div className="min-h-screen flex items-center justify-center p-10 bg-secondary text-primary">
+      <p className="text-sm font-semibold">Redirecting to Customer Account Portal...</p>
     </div>
   );
 }

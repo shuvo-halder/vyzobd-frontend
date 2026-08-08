@@ -11,17 +11,17 @@ This document cataloging existing code risks, anti-patterns, duplicated logic, a
 - **Temporary Fix**: Standardized fallback references to available images (`heroImg1.jpg`, `about1.jpg`).
 - **Recommendation**: Dynamic image URLs should come from backend API payloads or CDN paths rather than hardcoded local image imports.
 
-### 2. Lack of Centralized Error Interceptor
-- **Issue**: `src/lib/axios.js` defines a plain Axios instance without response interceptors for handling `401 Unauthorized` or `403 Forbidden` globally.
-- **Impact**: Unauthenticated requests fail silently in individual service try/catch blocks instead of automatically redirecting to `/login` or triggering a token refresh.
+### 2. Centralized Axios Interceptors & Network Failure Safeguard
+- **Status**: HARDENED (Phase 1.5)
+- **Resolution**: Updated `src/lib/axios.js` with a 15-second timeout and response interceptor logging network errors without causing infinite redirect loops. Navigation guards remain safely encapsulated in Next.js layout components (`AccountLayout`, `AdminLayout`).
 
-### 3. Mixed Admin / Customer Panel Responsibilities
-- **Issue**: The storefront codebase contains full Admin product management, category CRUD, user role changing, and revenue reporting (`/admin/*`).
-- **Impact**: Confuses storefront security boundaries. Admin capabilities should be removed/deprecated in favor of customer account features (`/account/*`).
+### 3. Customer vs. Admin Panel Route Separation
+- **Status**: HARDENED (Phase 1.5)
+- **Resolution**: Created a dedicated Customer Panel under `/account/*` (`/account`, `/account/profile`, `/account/orders`, `/account/addresses`, `/account/wishlist`, `/account/settings`). Admin routes (`/admin/*`) remain isolated and guarded by `isAdmin`. Customer routes rely strictly on `isAuthenticated` without depending on admin roles.
 
-### 4. Duplicate Order Views
-- **Issue**: Order listing logic exists in both `src/app/(shop)/orders/page.jsx` and `src/app/admin/orders/page.jsx`.
-- **Recommendation**: Unify order listing into a reusable `<OrderList />` component driven by `orderService.getMyOrders()`.
+### 4. Legacy Customer Route Consolidation
+- **Status**: HARDENED (Phase 1.5)
+- **Resolution**: Redirected legacy shop routes `/profile` and `/orders` to `/account/profile` and `/account/orders` respectively. Navbar dropdown links updated to point directly to `/account`.
 
 ### 5. Inconsistent State Synchronization in Effects
 - **Issue**: Effects in `AdminSidebar.jsx` and `Navbar.jsx` update navigation states on route changes, triggering linter warnings for cascading renders if not carefully managed.

@@ -51,9 +51,9 @@ The platform operates as a decoupled single-vendor ecommerce application:
 
 ### 2. Next.js Storefront Frontend (This Codebase)
 - **Framework**: Next.js 16 (App Router) with React 19 and Tailwind CSS v4.
-- **Public Commerce Experience**: Product catalog, search, filtering, single product details, shopping cart, and checkout.
+- **Public Commerce Experience**: Reference-inspired responsive Header & Navigation (Desktop top row + navigation bar, Mobile off-canvas drawer with backdrop and body scroll lock), product catalog, search, filtering, single product details, shopping cart, and checkout.
 - **Authentication Pages**: User login, registration, email verification, and password recovery.
-- **Panel Migration Goal**: Transforming the internal storefront `/admin` layout into a customer-facing **Customer Panel** (`/account`).
+- **Customer Panel**: Dedicated `/account` portal for user profile, address book, wishlist shell, settings, and order history.
 
 ---
 

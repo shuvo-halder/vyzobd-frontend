@@ -39,7 +39,15 @@ This document details the frontend directory layout, routing strategy, component
     │   │   ├── refund/page.jsx
     │   │   ├── sustainability/page.jsx
     │   │   └── terms/page.jsx
-    │   ├── admin/                     # Route Group: Existing Admin Panel (Target for Customer Panel)
+    │   ├── account/                   # Route Group: Customer Panel Portal
+    │   │   ├── layout.jsx             # Customer Sidebar + Auth Guard Layout (/account)
+    │   │   ├── page.jsx               # Customer Overview Dashboard
+    │   │   ├── profile/page.jsx       # Profile & Password Change
+    │   │   ├── orders/page.jsx        # Order History
+    │   │   ├── addresses/page.jsx     # Saved Address Book Shell
+    │   │   ├── wishlist/page.jsx      # Wishlist Shell
+    │   │   └── settings/page.jsx     # Customer Preferences & Security
+    │   ├── admin/                     # Route Group: Legacy Admin Panel (Independent Auth)
     │   │   ├── layout.jsx             # Admin Sidebar + Auth Guard Layout
     │   │   ├── page.jsx               # Admin Dashboard Overview
     │   │   ├── orders/page.jsx        # Admin Order Management
@@ -47,9 +55,12 @@ This document details the frontend directory layout, routing strategy, component
     │   │   └── users/page.jsx         # Admin User Management
     │   ├── globals.css                # Tailwind CSS v4 directives & theme variables
     │   └── layout.jsx                 # Root Layout with AuthProvider & CartProvider
+    ├── config/                        # Navigation and UI configurations
+    │   └── navigation.js              # Single Source of Truth for Storefront Navigation
     ├── components/
     │   ├── home/                      # Homepage specific sections (HeroSlider, FeaturedProducts, NewsLetter)
     │   └── shared/                    # Reusable UI (Navbar, Footer, ProductCard, AddToCartForm, AdminSidebar, etc.)
+    │       └── header/                # Modular Header Components (SearchBar, MobileDrawer)
     ├── context/                       # React Context Providers
     │   ├── AuthContext.jsx            # Global User Auth State
     │   └── CartContext.jsx            # Global Cart Count State
@@ -97,3 +108,19 @@ This document details the frontend directory layout, routing strategy, component
    - Fetches cart items count from `cartService.getCart()` on initial render.
 3. **Local Page State**:
    - Pages use standard React `useState` and `useEffect` hooks for fetching data via services.
+
+---
+
+## 🏛️ Header & Navigation Architecture (Phase 2 UI-1, UI-1.1, UI-1.2 & UI-1.3 Refinement)
+- **Single Source of Truth (`src/config/navigation.js`)**: Both Desktop and Mobile headers consume `NAV_ITEMS` and `CATEGORY_PLACEHOLDERS`.
+- **Desktop Header (`src/components/shared/Navbar.jsx`)**:
+  - **Top Row**: Compact height layout (`py-2.5`) featuring prominently sized store logo (`h-11 lg:h-12 w-auto`, ~44-48px height using `/public/logos/logo.svg`), central SearchBar (`SearchBar.jsx`), and customer account dropdown / cart count actions.
+  - **Bottom Row**: Horizontal navigation links with hoverable category dropdown preview, and customer hotline contact info (`h-11`).
+- **Mobile Header & Drawer (`src/components/shared/header/MobileDrawer.jsx`)**:
+  - Compact mobile top bar (`h-14`) with working hamburger toggle button (`handleOpenDrawer`), centered logo (`h-9 w-auto`), and cart badge.
+  - Slide-over off-canvas drawer with backdrop, Escape key listener, body scroll lock, search input, vertical category accordion, and account action footer.
+- **Responsive Logo Strategy**:
+  - **SVG Viewport Optimization**: Optimized `/public/logos/logo.svg`'s `viewBox` from `0 0 64 64` (with ~50% vertical empty whitespace) to a tight `1 11 62 31` (2:1 widescreen aspect ratio), removing vertical padding so that the actual visible logo artwork fills the rendered container.
+  - Desktop / Large Desktop: `h-11 lg:h-12 w-auto` (~44-48px visual height) providing a highly professional and visible brand anchor.
+  - Mobile & Drawer: `h-9 w-auto` (~36px visual height) maintaining compact 56px (`h-14`) mobile bar proportions.
+- **Backend API Integration Status**: Navigation menu and category dropdown endpoints are currently frontend abstractions ready for future `navigation.service.js` integration.

@@ -93,4 +93,5 @@ Whenever a new backend API endpoint or customer feature request is introduced, f
 1. **Never Invent Endpoints**: Only write service functions for API routes explicitly confirmed by the backend team or present in the source code.
 2. **Preserve Working Interfaces**: Do not rename existing service functions or parameters unless necessary.
 3. **Keep Axios Instance Centralized**: Always import `api` from `@/lib/axios`. Do not instantiate separate Axios instances.
-4. **Document Modifications**: Immediately update `/docs/api/api-inventory.md` whenever an endpoint status changes from `UNKNOWN` to `Existing`.
+4. **Decouple UI Navigation**: Navigation data models (e.g. `src/config/navigation.js`) act as single sources of truth consumed by UI components until dedicated backend navigation endpoints are integrated.
+5. **Document Modifications**: Immediately update `/docs/api/api-inventory.md` whenever an endpoint status changes from `UNKNOWN` to `Existing`.
